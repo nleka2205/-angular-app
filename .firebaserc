@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-signup-7e2ea": {
+      "hosting": {
+        "project": [
+          "angular-signup-7e2ea"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-signup-7e2ea"
+  }
+}

@@ -1,1 +1,89 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container{
+    margin: 50px auto;
+}
+.form-container{
+    display: block;
+    margin: auto;
+    max-width: 300px;
+    padding: 50px;
+    border-radius: 15px;
+    background-color: #e6efef;
+    mat-form-field,button{
+        width: 100%;
+    }
+    .signup{
+        margin: 15px auto;
+    }
+    .mat-form-field-appearance-legacy {
+        .mat-form-field-label {
+            color: rgb(0, 0, 0, .5);
+        }
+        .mat-form-field-underline {
+            background-color: rgba(0, 0, 0, .3);
+        }        
+    }
+    .mat-form-field-invalid{
+        .mat-form-field-label {
+            color: #f44336;
+        }
+    }     
+}
+.mat-menu-content{
+    padding: 0px!important;
+}
+.mat-menu-panel {
+    min-height: inherit!important;
+    min-width: 145px!important;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.mt{
+    margin-top: 15px;
+}
+.mb{
+    margin-bottom: 15px;
+}
+.mr{
+    margin-right: 15px!important;
+}
+.ml{
+    margin-left: 15px!important;
+}
+.m-15{
+    margin: 15px!important;
+}
+@media screen and (max-width:500px) {
+    .features{
+        display: flex;
+        flex-direction: column;
+        .card{
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+}
+@media screen and (min-width:501px) {
+    .features{
+        display: flex;    
+        flex-direction: row;
+        .card{           
+            max-width: 500px;
+            min-width: 300px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    }
+}

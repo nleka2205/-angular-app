@@ -1,0 +1,10 @@
+<div *ngIf="user | async as user">
+    <h2 class="ml" >
+        Welcome to the app, {{user.email}}
+    </h2>
+    <div class="features m-15">
+        <app-card [cardTitle]="firstCardTitle" [cardDesc]="firstCardDesc" [cardIcon]="firstCardIcon" routerLink="/todo"></app-card>
+        <app-card [cardTitle]="secondCardTitle" [cardDesc]="secondCardDesc" [cardIcon]="secondCardIcon" routerLink="/contacts"></app-card>
+    </div>
+</div>
+
