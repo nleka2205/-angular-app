@@ -17,14 +17,16 @@ import { LoginComponent } from './components/login/login.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuModule } from '@angular/material/menu';
 import { CardComponent } from './components/card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { TodoComponent } from './components/todo/todo.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     LoginComponent,
     CardComponent,
     TodoComponent,
-    ContactsComponent
+    ContactsComponent,
+    TodoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -47,13 +50,14 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
     MatMenuModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatSelectModule,
 
   ],
   providers: [],

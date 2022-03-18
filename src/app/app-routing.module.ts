@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import { TodoComponent } from './components/todo/todo.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['home']);
@@ -34,6 +35,16 @@ const routes: Routes = [
   {
       path: 'todo',
       component: TodoComponent,
+      ...canActivate(redirectToLogin)
+  },
+  {
+      path: 'todo/new',
+      component: TodoFormComponent,
+      ...canActivate(redirectToLogin)
+  },
+  {
+      path: 'todo/:id',
+      component: TodoFormComponent,
       ...canActivate(redirectToLogin)
   },
   {

@@ -31,7 +31,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         .mat-form-field-label {
             color: #f44336;
         }
-    }     
+    }  
+    .mat-stroked-button{
+        &:not(.mat-option-disabled){
+            border-color: #7b1fa2;
+        }
+        
+    }   
+}
+.form-container-item {
+    max-width: 500px!important;
 }
 .mat-menu-content{
     padding: 0px!important;
@@ -74,6 +83,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             cursor: pointer;
         }
     }
+    table, .header{
+        width: calc(100vw - 30px);
+        margin: 15px;
+    }
 }
 @media screen and (min-width:501px) {
     .features{
@@ -86,4 +99,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             cursor: pointer;
         }
     }
+    table, .header{
+        width: 75vw;
+        min-width: 500px;
+        margin: auto;
+    }
+}
+
+.mat-header-cell, .mat-cell{
+    padding: 15px!important;
+}
+.header, .footer-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.footer-btn{
+    button{
+        width: 25%;
+    }
+}
+.mat-select-value, .mat-select-arrow{
+    color: rgb(0, 0, 0, .5);
+}
+.mat-primary{
+    .mat-option{
+        &.mat-selected{
+            &:not(.mat-option-disabled){
+                color: rgb(255, 255, 255, .8)!important;
+            }
+        }
+    }
+} 
+.hidden{
+    display: none!important;
 }

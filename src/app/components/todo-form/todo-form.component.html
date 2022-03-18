@@ -1,0 +1,36 @@
+<div class="form-container form-container-item mat-elevation-z5" >
+    <h1>{{formName}}</h1>
+    <form [formGroup]="itemForm" (ngSubmit)="submit()">
+        <mat-form-field class="mb">
+            <input matInput placeholder="Title*" type="text" formControlName="title" [(ngModel)]="item.title" />
+            <mat-error *ngIf="title?.errors?.['required']">
+                Please enter the title of the item
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="mb">
+            <input matInput placeholder="Description" type="email" formControlName="description" [(ngModel)]="item.description"  />
+            <mat-error *ngIf="description?.errors?.['required']">
+                Please enter the description of the item
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="mb hidden" *ngIf="auth.currentUser | async as user">
+            <input matInput type="text" formControlName="userId" [ngModel]="user.email" />           
+        </mat-form-field>
+        <mat-form-field class="mb">
+            <mat-label>Please the status</mat-label>
+            <mat-select formControlName="status" [(ngModel)]="item.status" >
+              <mat-option value="Opened">Opened</mat-option>
+              <mat-option value="Pending">Pending</mat-option>
+              <mat-option value="Closed">Closed</mat-option>
+            </mat-select>
+            <mat-error *ngIf="status?.errors?.['required']">
+                Please enter the status of the item
+            </mat-error>
+        </mat-form-field>        
+        <div class="footer-btn">
+            <button mat-stroked-button type="button" color="primary" routerLink="/todo"><mat-icon>chevron_left</mat-icon>Back</button>
+            <button mat-raised-button type="submit" color="primary">{{btnName}}</button>
+            <button mat-raised-button type="button" color="primary" *ngIf="item.id" (click)="delete()">Delete</button>
+        </div>        
+    </form>
+</div>

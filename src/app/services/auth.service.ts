@@ -8,14 +8,15 @@ import { switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
 
   constructor(
     private auth: Auth
-  ) { }
+  ) {}
 
+  
   currentUser = authState(this.auth);
-
+  
   login(email: string, password: string){
     return from(signInWithEmailAndPassword(this.auth, email, password));
   }
