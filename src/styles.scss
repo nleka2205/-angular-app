@@ -83,9 +83,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
             cursor: pointer;
         }
     }
-    table, .header{
+    table, .header, .list{
         width: calc(100vw - 30px);
         margin: 15px;
+    }
+    .flex-row-mobile{
+        flex-direction: row!important;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .flex-column-mobile{
+        flex-direction: column!important;
+    }    
+    .d-none-mobile{
+        display: none;
+    }
+    .mat-form-field-infix {
+        width: 200px!important;
     }
 }
 @media screen and (min-width:501px) {
@@ -99,7 +113,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
             cursor: pointer;
         }
     }
-    table, .header{
+    table, .header, .list{
         width: 75vw;
         min-width: 500px;
         margin: auto;
@@ -109,10 +123,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
 .mat-header-cell, .mat-cell{
     padding: 15px!important;
 }
-.header, .footer-btn{
+.header, .footer-btn, .list{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: baseline;
 }
 .footer-btn{
     button{
@@ -137,6 +152,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
 .d-flex{
     display: flex;
 }
+.flex-1{
+    flex: 1;
+    width: 100%;
+}
+.flex-column{
+    flex-direction: column;
+}
 .status{
     border: solid 1px #fff;
     width: 10px;
@@ -151,5 +173,60 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
     }
     &.closed {    
         background: red;
+    }
+}
+.search{
+    flex: 1;
+    text-align: right;
+    margin-right: 15px;
+    .mat-form-field-appearance-legacy {       
+        margin-right:15px; 
+        .mat-form-field-label {
+            color: rgb(0, 0, 0, .5);
+        }
+        .mat-form-field-underline {
+            background-color: rgba(0, 0, 0, .3);
+        }        
+    }
+    .mat-form-field-invalid{
+        .mat-form-field-label {
+            color: #f44336;
+        }
+    }  
+    .mat-stroked-button{
+        &:not(.mat-option-disabled){
+            border-color: #7b1fa2;
+        }
+        
+    }   
+    form{
+        display: flex;
+        height: 36px;
+    }
+}
+
+.circle{
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    .mat-icon{
+        color:#424242;
+    }
+}
+.list{
+    a{
+        text-decoration: none;
+    }
+    .card{
+        .flex-1{
+            height: 40px;
+        }
+    }
+    .mat-card-title {
+        font-size: 18px;
     }
 }
