@@ -19,14 +19,13 @@ export class TodoService {
     public auth: AuthService
   ){}
 
-  email!: string;
 
   getToDoItems(): Observable<Todoitem[]>{  
-     return this.firestoreService.collection<Todoitem>("todolist").snapshotChanges()
+     return this.firestoreService.collection<Todoitem>("todolist", ref => ref.where('userId','==', this.auth.usernameEmail)).snapshotChanges()
      .pipe(
       map((changes: any) => changes.map((c: any) => ({
         id: c.payload.doc.id,
-        ... c.payload.doc.data()
+        ...c.payload.doc.data()
       }))
       )
     )

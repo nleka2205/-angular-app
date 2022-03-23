@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: inline-table; width: 100%; }
 
 .container{
     margin: 50px auto;
@@ -133,4 +133,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 } 
 .hidden{
     display: none!important;
+}
+.d-flex{
+    display: flex;
+}
+.status{
+    border: solid 1px #fff;
+    width: 10px;
+    height: 11px;
+    border-radius: 50%;
+    margin: 2px 5px;
+    &.opened {    
+        background: green;
+    }
+    &.pending {    
+        background: orange;
+    }
+    &.closed {    
+        background: red;
+    }
 }

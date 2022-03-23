@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { authState } from 'rxfire/auth';
-import { from } from 'rxjs';
+import { from, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -16,6 +16,8 @@ export class AuthService{
 
   
   currentUser = authState(this.auth);
+  usernameEmail = getAuth().currentUser?.email;
+  userEmail: Subscription = this.currentUser.subscribe(el => {this.usernameEmail = el?.email});
   
   login(email: string, password: string){
     return from(signInWithEmailAndPassword(this.auth, email, password));
