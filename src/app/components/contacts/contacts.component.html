@@ -4,79 +4,39 @@
     </div>
     <div class="flex-row-mobile d-flex">
         <div class="search">
-            <form>
-                <mat-form-field class="mb">
-                    <input matInput placeholder="Contact Name or Number" type="search" formControlName="name"/>
-                    <!-- <mat-error *ngIf="name?.errors?.['required']">
-                        Please enter your name
-                    </mat-error> -->
-                </mat-form-field>
-                <button mat-raised-button type="submit" color="primary"><mat-icon>search</mat-icon><span class="d-none-mobile">Search</span></button>
-            </form>
+            <mat-form-field class="mb d-flex">
+                <input matInput placeholder="Contact Name or Number" (keyup)="searchContacts($any($event.target).value)" />
+                <mat-icon>search</mat-icon>
+            </mat-form-field>
         </div>
         <div>
-            <button mat-raised-button type="submit" color="primary" routerLink="new"><mat-icon>add</mat-icon>Add <span class="d-none-mobile">contact</span></button>
+            <button mat-raised-button type="submit" color="primary" (click)="addContact()">
+                <mat-icon>add</mat-icon>
+                Add <span class="d-none-mobile">contact</span>
+            </button>
         </div>
     </div>
 </div>
 <div class="list d-flex flex-column">
-    <div class="card mb flex-1">
+    <div *ngFor="let contact of contacts | async; let i=index" class="card mb flex-1">
         <mat-card class="example-card">
             <mat-card-title-group>                
-                    <a [href]="'tel:0023569885'">         
+                    <a [href]="'tel:' + contact.contactNumber">         
                         <div class="circle mr">                        
                             <mat-icon>phone</mat-icon>                        
                         </div>
                     </a>
                     <div class="flex-1 ml">
-                        <mat-card-title>test</mat-card-title>
-                        <mat-card-subtitle>test</mat-card-subtitle>
+                        <mat-card-title>{{ contact.contactName }}</mat-card-title>
+                        <mat-card-subtitle>{{ contact.contactNumber | phone}}</mat-card-subtitle>
                     </div>
                     <div>
-                        <mat-icon>delete</mat-icon>
+                        <mat-icon (click)="deleteContact(contact)">delete</mat-icon>
                     </div>
                 
             </mat-card-title-group>
         </mat-card>
-    </div>
-    <div class="card mb flex-1">
-        <mat-card class="example-card">
-            <mat-card-title-group>                
-                    <a [href]="'tel:0023569885'">         
-                        <div class="circle mr">                        
-                            <mat-icon>phone</mat-icon>                        
-                        </div>
-                    </a>
-                    <div class="flex-1 ml">
-                        <mat-card-title>test</mat-card-title>
-                        <mat-card-subtitle>test</mat-card-subtitle>
-                    </div>
-                    <div>
-                        <mat-icon>delete</mat-icon>
-                    </div>
-                
-            </mat-card-title-group>
-        </mat-card>
-    </div>
-    <div class="card mb flex-1">
-        <mat-card class="example-card">
-            <mat-card-title-group>       
-                    <a [href]="'tel:0023569885'">         
-                        <div class="circle mr">                        
-                            <mat-icon>phone</mat-icon>                        
-                        </div>
-                    </a>
-                    <div class="flex-1 ml">
-                        <mat-card-title>test</mat-card-title>
-                        <mat-card-subtitle>test</mat-card-subtitle>
-                    </div>
-                    <div>
-                        <mat-icon>delete</mat-icon>
-                    </div>
-                
-            </mat-card-title-group>
-        </mat-card>
-    </div>
+    </div>   
 </div>
 
 

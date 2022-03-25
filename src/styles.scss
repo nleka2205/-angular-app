@@ -99,7 +99,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
         display: none;
     }
     .mat-form-field-infix {
-        width: 200px!important;
+        display: flex!important;
+        border-top: none!important;
     }
 }
 @media screen and (min-width:501px) {
@@ -117,6 +118,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
         width: 75vw;
         min-width: 500px;
         margin: auto;
+    }
+    .mat-form-field-infix {
+        display: flex!important;
+        border-top: none!important;
+        font-size: 13px;
+        .mat-icon {
+            color:#cccccc;
+        }
     }
 }
 
@@ -179,6 +188,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
     flex: 1;
     text-align: right;
     margin-right: 15px;
+    display: flex;
+    height: 36px;
     .mat-form-field-appearance-legacy {       
         margin-right:15px; 
         .mat-form-field-label {
@@ -186,7 +197,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
         }
         .mat-form-field-underline {
             background-color: rgba(0, 0, 0, .3);
-        }        
+        }  
+        
+        .mat-form-field-label {
+            top: 23px!important;
+        }
+        
     }
     .mat-form-field-invalid{
         .mat-form-field-label {
@@ -229,4 +245,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: in
     .mat-card-title {
         font-size: 18px;
     }
+}
+.modal{
+    padding: 30px 60px;
+    mat-form-field, button{
+        width: 100%;
+    }    
+    .mat-form-field-appearance-legacy {
+        .mat-form-field-label {
+            color: rgb(0, 0, 0, .5);
+        }
+        .mat-form-field-underline {
+            background-color: rgba(0, 0, 0, .3);
+        }        
+    }
+    .mat-form-field-invalid{
+        .mat-form-field-label {
+            color: #f44336;
+        }
+    }  
+    .mat-stroked-button{
+        &:not(.mat-option-disabled){
+            border-color: #7b1fa2;
+        }
+        
+    }   
+}
+.ngneat-dialog-content{
+    max-width: 90%!important;
+}
+.ngneat-dialog-backdrop {
+    padding: inherit!important;
+}
+.flex-column-mobile{
+    margin-bottom: 15px;
 }

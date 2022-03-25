@@ -1,51 +1,109 @@
 import { Injectable } from "@angular/core";
+import { DialogService } from "@ngneat/dialog";
+import { HotToastService } from "@ngneat/hot-toast";
 import { ComponentStore } from "@ngrx/component-store";
-import { Observable } from "rxjs";
+import { Observable, EMPTY } from "rxjs";
+import { catchError, concatMap, filter, switchMap, tap } from "rxjs/operators";
+import { AddcontactComponent } from "../components/addcontact/addcontact.component";
 import { Contact } from "../models/contact";
+import { ContactsService } from "../services/contacts.service";
 
 export interface ContanctsState{
     contacts: Contact[];
     search: string;
 }
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
+
 export class ContactsStore extends ComponentStore<ContanctsState>{
-    constructor(){
+    constructor(
+        private contactsService: ContactsService,
+        private toast: HotToastService,
+        private dialog: DialogService
+    ){
         super({
-            contacts: [
-                {
-                    contactName: 'John Doe',
-                    contactNumber: 111-555-1234
-                },
-                {
-                    contactName: 'Jane Doe',
-                    contactNumber: 111-555-5678
-                },
-                {
-                    contactName: 'John Doe John',
-                    contactNumber: 111-555-9012
-                },
-                {
-                    contactName: 'Jane Doe John',
-                    contactNumber: 111-555-3456
-                },
-                {
-                    contactName: 'John Doe Jane',
-                    contactNumber: 111-555-7890
-                },
-                {
-                    contactName: 'Jane Doe Jane',
-                    contactNumber: 111-555-1234
-                },
-                
-            ],
-            search: ''
-        })
+            contacts: [],
+            search: '',
+        });
+    
+        this.fetchContacts();
     }
 
-    contacts: Observable<Contact[]> = this.select(state => state.contacts);
+    //contacts: Observable<Contact[]> = this.select(state => state.contacts);
 
-    filteredContancts = this.select(({contacts, search}) => contacts.filter((c) => {
-        c.contactName.toLowerCase().includes(search.toLowerCase())
-    }))
+    readonly filteredContacts: Observable<Contact[]> = this.select(
+        ({contacts, search}) => 
+            contacts.filter((c) => 
+                c.contactName.toLowerCase().includes(search.toLowerCase())
+            )
+    );
+
+        
+    readonly setContacts = this.updater((state, contacts: Contact[]) => ({
+        ...state,
+        contacts,
+    }));
+    
+    readonly fetchContacts = this.effect((trigger) =>
+        trigger.pipe(
+            switchMap(() =>
+                this.contactsService.fetchContacts().pipe(
+                    this.toast.observe({
+                        loading: 'Loading...',
+                        success: 'Contacts fetched!',
+                        error: 'Could not fetch.',
+                    }),
+                    tap(data => {
+                        this.setContacts(data);
+                    }),
+                    catchError(() => EMPTY)
+                )
+            )
+        )
+    );
+    readonly deleteContact = this.effect<Contact>((contact) =>
+        contact.pipe(
+            concatMap((contact) =>
+                this.contactsService.deleteContact(contact).pipe(
+                this.toast.observe({
+                    loading: 'Deleting contact...',
+                    success: 'Contact deleted!',
+                    error: 'Could not delete.',
+                }),
+                tap(() => this.fetchContacts()),
+                catchError(() => EMPTY)
+                )
+            )
+        )
+    );
+    readonly addContact = this.effect<Contact>((contact) =>
+        contact.pipe(
+        concatMap(contact =>
+            this.contactsService.addContact(contact).pipe(
+                tap(() => this.fetchContacts()),
+                this.toast.observe({
+                    loading: 'Adding contact...',
+                    success: 'Contact added!',
+                    error: 'Could not add.',
+                }),
+                catchError(() => EMPTY)
+                )
+            )
+        )
+    );
+
+    readonly showAddDialog = this.effect((trigger$) =>
+        trigger$.pipe(
+            switchMap(() => 
+                this.dialog.open(AddcontactComponent).afterClosed$.pipe(
+                    filter(contact => !!contact),
+                    tap((contact: Contact) => {
+                        this.addContact(contact);
+                    })
+                )
+            )           
+        )
+    );
 }

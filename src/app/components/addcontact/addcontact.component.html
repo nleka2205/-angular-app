@@ -1,0 +1,23 @@
+<div class="modal">
+    <h2 class="">Add Contact</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="submit()">    
+        <mat-form-field class="mb">
+            <input matInput placeholder="Full Name*" type="text"  formControlName="contactName" />
+            <mat-error *ngIf="name?.errors?.['required']">
+                Please enter the full name of your contact
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="mb">
+            <input matInput placeholder="Phone Number*" type="text" pattern="[0-9]*" formControlName="contactNumber" />
+            <mat-error *ngIf="number?.errors?.['pattern']">Please enter only numbers!</mat-error>
+            <mat-error *ngIf="number?.errors?.['required']">
+                Please enter the phone number of your contact
+            </mat-error>
+           
+        </mat-form-field>
+        
+        <div class="footer-btn">
+            <button mat-raised-button type="submit" color="primary">Save</button>
+        </div>  
+    </form>
+</div>

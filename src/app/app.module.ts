@@ -27,6 +27,10 @@ import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AddcontactComponent } from './components/addcontact/addcontact.component';
+import { DialogModule } from '@ngneat/dialog';
+import { PhonePipe } from './pipes/phone.pipe';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { AngularFireModule } from '@angular/fire/compat';
     CardComponent,
     TodoComponent,
     ContactsComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    AddcontactComponent,
+    PhonePipe
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     MatCardModule,
     MatTableModule,
     MatSelectModule,
-
+    DialogModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

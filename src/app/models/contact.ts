@@ -1,4 +1,4 @@
 export interface Contact{
     contactName: string,
-    contactNumber: number
+    contactNumber: string
 }
